@@ -1,3 +1,5 @@
+package game;
+
 /**
  * Enum contendo todas as possíveis cores do jogo
  */

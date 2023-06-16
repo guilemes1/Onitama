@@ -1,3 +1,10 @@
+package game;
+
+import exception.IllegalMovementException;
+import exception.IncorrectTurnOrderException;
+import exception.InvalidCardException;
+import exception.InvalidPieceException;
+
 /**
  * Interface que contém métodos que serão chamados para a execução do jogo
  */
@@ -5,32 +12,32 @@ public interface Game {
     /**
      * Método que devolve a cor da posição do tabuleiro. Se possui uma cor, significa que é um templo. Caso contrário, é um espaço normal
      * @param position Posição do tabuleiro
-     * @return O enum Color que representa a cor da posição
+     * @return O enum game.Color que representa a cor da posição
      */
     Color getSpotColor(Position position);
 
     /**
      * Método que devolve a peça que está na posição do tabuleiro
      * @param position Posição do tabuleiro
-     * @return Um objeto Piece que representa a peça na posição indicada. Se não tiver peça, devolve null
+     * @return Um objeto game.Piece que representa a peça na posição indicada. Se não tiver peça, devolve null
      */
     Piece getPiece(Position position);
 
     /**
      * Método que devolve a carta que está na mesa, que será substituída após a próxima jogada
-     * @return Um objeto Card que representa a carta na mesa
+     * @return Um objeto game.Card que representa a carta na mesa
      */
     Card getTableCard();
 
     /**
      * Método que devolve as informações sobre o jogador com as peças vermelhas
-     * @return Um objeto Player que representa o jogador vermelho
+     * @return Um objeto game.Player que representa o jogador vermelho
      */
     Player getRedPlayer();
 
     /**
      * Método que devolve as informações sobre o jogador com as peças azuis
-     * @return Um objeto Player que representa o jogador azul
+     * @return Um objeto game.Player que representa o jogador azul
      */
     Player getBluePlayer();
 

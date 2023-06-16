@@ -1,3 +1,7 @@
+package game;
+
+import exception.InvalidCardException;
+
 /**
  * Classe que contém informações e ações básicas relacionadas aos jogadores
  */
@@ -41,7 +45,7 @@ public class Player {
 
     /**
      * Método que devolve a cor das peças do jogador
-     * @return Enum Color com a cor das peças do jogador
+     * @return Enum game.Color com a cor das peças do jogador
      */
     public Color getPieceColor() {
         return this.pieceColor;

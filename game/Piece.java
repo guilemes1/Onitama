@@ -1,3 +1,5 @@
+package game;
+
 /**
  * Classe que contém informações das peças de jogo
  */
@@ -17,7 +19,7 @@ public class Piece {
 
     /**
      * Método que devolve a cor da peça
-     * @return Enum Color com a cor da peça
+     * @return Enum game.Color com a cor da peça
      */
     public Color getColor() {
         return this.color;

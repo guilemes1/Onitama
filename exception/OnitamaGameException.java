@@ -1,12 +1,14 @@
+package exception;
+
 /**
- * Exceção para quando se tenta fazer um movimento inválido
+ * Exceção geral para qualquer regra burlada
  */
-public class IllegalMovementException extends OnitamaGameException {
+public class OnitamaGameException extends RuntimeException {
     /**
      * Construtor que recebe uma mensagem e repassa para a superclasse
      * @param message A mensagem descrevendo o motivo do problema
      */
-    public IllegalMovementException(String message) {
+    public OnitamaGameException(String message) {
         super(message);
     }
 }
