@@ -28,8 +28,7 @@ public class Spot {
      * @param pos Posição do espaço no tabuleiro
      */
     public Spot(Piece piece, Position pos) {
-        this.piece = piece;
-        this.pos = pos;
+        this(piece, pos, Color.NONE);
     }
 
     /**
@@ -37,7 +36,7 @@ public class Spot {
      * @param pos Posição do espaço no tabuleiro
      */
     public Spot(Position pos) {
-        this.pos = pos;
+        this(null, pos, Color.NONE);
     }
 
     /**
@@ -65,18 +64,32 @@ public class Spot {
     }
 
     /**
+     * Método que verifica se a posição é válida no tabuleiro
+     *
+     * @return Um booleano que indica se o objeto representa uma posição válida no
+     *         tabuleiro
+     */
+    public boolean isValid() { // revisar
+        return pos != null;
+    }
+
+    /**
      * Método que ocupa o espaço atual com a peça passada
      * @param piece A peça para ocupar este espaço
      * @exception IllegalMovementException Caso o espaço já esteja ocupado por uma peça da mesma cor
      */
     protected void occupySpot(Piece piece) throws IllegalMovementException {
-
+        if(this.piece != null && this.piece.getColor() == piece.getColor()) {
+            throw new IllegalMovementException("Ponto já ocupado por uma peça da mesma cor");
+        }
+        this.piece = piece;
     }
 
     /**
      * Método que "libera" o espaço atual, ou seja, deixa-o vazio
      */
     protected void releaseSpot() {
-
+        this.piece = null;
+        this.color = Color.NONE;
     }
 }

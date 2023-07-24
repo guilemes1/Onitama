@@ -66,6 +66,25 @@ public class Player {
      * @exception InvalidCardException Caso a carta não esteja na mão do jogador e/ou na mesa
      */
     protected void swapCard(Card oldCard, Card newCard) throws InvalidCardException {
+        boolean hasOldCard = false;
+        for (Card card: cards) {
+            if (card.equals(oldCard)) {
+                hasOldCard = true;
+                break;
+            }
+        }
+
+        if(!hasOldCard) {
+            throw new InvalidCardException("A carta antiga não esta na mão do jogador");
+        }
+
+        //Realize a troca da carta na mão do jogador
+        for (int i = 0; i < cards.length; i++) {
+            if (cards[i].equals(oldCard)) {
+                cards[i] = newCard;
+                break;
+            }
+        }
 
     }
 }

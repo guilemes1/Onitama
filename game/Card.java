@@ -68,3 +68,4 @@ public class Card {
 
         return cartasEmbaralhadas.subList(0, 5).toArray(new Card[0]);
     }
+}

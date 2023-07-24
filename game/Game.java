@@ -30,6 +30,11 @@ public interface Game {
     Card getTableCard();
 
     /**
+     * Método que define a carta na mesa
+     */
+    void setTableCard(Card tableCard);
+
+    /**
      * Método que devolve as informações sobre o jogador com as peças vermelhas
      * @return Um objeto game.Player que representa o jogador vermelho
      */
@@ -42,16 +47,28 @@ public interface Game {
     Player getBluePlayer();
 
     /**
+     * Método que devolve as informações sobre o jogador atual
+     *
+     * @return Um objeto Player que representa o jogador atual
+     */
+    Player getCurrentPlayer();
+
+    /**
+     * Método que define as informações sobre o jogador atual
+     */
+    void setCurrentPlayer(Player currentPlayer);
+
+    /**
      * Método que move uma peça
-     * @param card A carta de movimento que será usada
-     * @param cardMove A posição da carta para onde a peça irá se mover
-     * @param currentPos A posição da peça que irá se mover
+     * @param piece    A peça que irá mover
+     * @param card     A carta de movimento que será usada
+     * @param position A posição da carta para onde a peça irá se mover
      * @exception IncorrectTurnOrderException Caso não seja a vez de um jogador fazer um movimento
      * @exception IllegalMovementException Caso uma peça seja movida para fora do tabuleiro ou para uma posição onde já tem uma peça da mesma cor
      * @exception InvalidCardException Caso uma carta que não está na mão do jogador seja usada
      * @exception InvalidPieceException Caso uma peça que não está no tabuleiro seja usada
      */
-    void makeMove(Card card, Position cardMove, Position currentPos) throws IncorrectTurnOrderException, IllegalMovementException, InvalidCardException, InvalidPieceException;
+    void makeMove(Piece piece, Card card, Position position) throws IncorrectTurnOrderException, IllegalMovementException, InvalidCardException, InvalidPieceException;
 
     /**
      * Método que confere se um jogador de uma determinada cor venceu o jogo. Critérios de vitória:
@@ -67,4 +84,6 @@ public interface Game {
      * OBS: Esse método é opcional não será utilizado na correção, mas serve para acompanhar os resultados parciais do jogo
      */
     void printBoard();
+
+    void takeMove() throws IncorrectTurnOrderException, IllegalMovementException, InvalidCardException, InvalidPieceException;
 }

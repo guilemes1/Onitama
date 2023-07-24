@@ -7,6 +7,7 @@ public class Piece {
 
     private Color color;
     private boolean isMaster;
+    private boolean isAlive;
     /**
      * Construtor que define a cor e o tipo da peça
      * @param color Cor da peça
@@ -31,5 +32,13 @@ public class Piece {
      */
     public boolean isMaster() {
         return this.isMaster;
+    }
+
+    public Boolean isAlive() {
+        return this.isAlive;
+    }
+
+    public void setIsAlive(boolean isAlive) {
+        this.isAlive = isAlive;
     }
 }

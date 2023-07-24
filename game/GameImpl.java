@@ -22,6 +22,11 @@ public class GameImpl implements Game{
     }
 
     @Override
+    public void setTableCard(Card tableCard) {
+
+    }
+
+    @Override
     public Player getRedPlayer() {
         return null;
     }
@@ -32,7 +37,17 @@ public class GameImpl implements Game{
     }
 
     @Override
-    public void makeMove(Card card, Position cardMove, Position currentPos) throws IncorrectTurnOrderException, IllegalMovementException, InvalidCardException, InvalidPieceException {
+    public Player getCurrentPlayer() {
+        return null;
+    }
+
+    @Override
+    public void setCurrentPlayer(Player currentPlayer) {
+
+    }
+
+    @Override
+    public void makeMove(Piece piece, Card card, Position position) throws IncorrectTurnOrderException, IllegalMovementException, InvalidCardException, InvalidPieceException {
 
     }
 
@@ -43,6 +58,11 @@ public class GameImpl implements Game{
 
     @Override
     public void printBoard() {
+
+    }
+
+    @Override
+    public void takeMove() throws IncorrectTurnOrderException, IllegalMovementException, InvalidCardException, InvalidPieceException {
 
     }
 }
