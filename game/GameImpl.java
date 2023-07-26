@@ -6,44 +6,50 @@ import exception.InvalidCardException;
 import exception.InvalidPieceException;
 
 public class GameImpl implements Game{
+
+    private Spot[][] board;
+    private Card tableCard;
+    private Player redPlayer;
+    private Player bluePlayer;
+    private Player currentPlayer;
     @Override
     public Color getSpotColor(Position position) {
-        return null;
+        return this.board[position.getRow()][position.getCol()].getColor();
     }
 
     @Override
     public Piece getPiece(Position position) {
-        return null;
+        return this.board[position.getRow()][position.getCol()].getPiece();
     }
 
     @Override
     public Card getTableCard() {
-        return null;
+        return this.tableCard;
     }
 
     @Override
     public void setTableCard(Card tableCard) {
-
+        this.tableCard = tableCard;
     }
 
     @Override
     public Player getRedPlayer() {
-        return null;
+        return this.redPlayer;
     }
 
     @Override
     public Player getBluePlayer() {
-        return null;
+        return this.bluePlayer;
     }
 
     @Override
     public Player getCurrentPlayer() {
-        return null;
+        return this.currentPlayer;
     }
 
     @Override
     public void setCurrentPlayer(Player currentPlayer) {
-
+        this.currentPlayer = currentPlayer;
     }
 
     @Override
