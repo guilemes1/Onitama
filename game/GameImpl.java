@@ -12,6 +12,32 @@ public class GameImpl implements Game{
     private Player redPlayer;
     private Player bluePlayer;
     private Player currentPlayer;
+
+    public GameImpl(Player redPlayer, Player bluePlayer) {
+        this.board = new Spot[5][5];
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                if (i == 0) {               //caso a linha seja 0 é azul
+                    if (j == 2) {           //caso a posição seja a do meio é mestre
+                        this.board[i][j] = new Spot(new Piece(Color.BLUE, true), new Position(i, j), Color.BLUE);
+                    } else {
+                        this.board[i][j] = new Spot(new Piece(Color.BLUE, false), new Position(i, j), Color.BLUE);
+                    }
+                } else if (i == 4) {        //caso a linha seja 4 é vermelho
+                    if (j == 2) {
+                        this.board[i][j] = new Spot(new Piece(Color.RED, true), new Position(i, j), Color.RED);
+                    } else {
+                        this.board[i][j] = new Spot(new Piece(Color.RED, false), new Position(i, j), Color.RED);
+                    }
+                } else {   //Senão marcar como none
+                    this.board[i][j] = new Spot(new Position(i, j));
+                }
+            }
+        }
+        this.redPlayer = redPlayer;
+        this.bluePlayer = bluePlayer;
+    }
+
     @Override
     public Color getSpotColor(Position position) {
         return this.board[position.getRow()][position.getCol()].getColor();
