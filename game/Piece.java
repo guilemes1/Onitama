@@ -16,6 +16,7 @@ public class Piece {
     public Piece(Color color, boolean isMaster) {
         this.color = color;
         this.isMaster = isMaster;
+        this.isAlive = true;
     }
 
     /**

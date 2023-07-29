@@ -30,6 +30,17 @@ public class Main {
         // define o jogador atual com base na cor da carta da mesa
         game.setCurrentPlayer(game.getTableCard().getColor() == Color.BLUE ? jogadorAzul : jogadorVermelho);
 
-        System.out.println("A carta na mesa é " + game.getTableCard().getName());
+        System.out.println("A carta na mesa é " + game.getTableCard().getName() + "\n");
+
+        boolean azulGanhou = game.checkVictory(Color.BLUE);
+        boolean vermelhoGanhou = game.checkVictory(Color.RED);
+
+        while (!azulGanhou && !vermelhoGanhou) {
+            try {
+                game.takeMove();
+            } catch (NumberFormatException e) {
+                System.out.println("Digite um número inteiro entre 0 e 4\n");
+            }
+        }
     }
 }

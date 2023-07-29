@@ -68,4 +68,36 @@ public class Card {
 
         return cartasEmbaralhadas.subList(0, 5).toArray(new Card[0]);
     }
+
+    /**
+     * Método imprime todos os movimentos possiveis de uma carta a partir do centro
+     * do tabuleiro
+     */
+    public void printMoviments() {
+        String amarelo = "\u001B[33m";
+        String roxo = "\u001B[35m";
+        String reset = "\u001B[0m";
+
+        System.out.println("Selecione qual movimento deseja fazer, partindo do " + roxo + "roxo" + reset + " e indo para o " + amarelo + "amarelo" + reset);
+
+        Position[] posicoes = this.getPositions();
+        for (int i = 0; i < posicoes.length; i++) {
+            System.out.println("Movimento " + (i + 1) + ":");
+            System.out.println("  0 1 2 3 4");
+            for (int j = 0; j < 5; j++) {
+                System.out.print(j + " ");
+                for (int k = 0; k < 5; k++) {
+                    if (j == 2 && k == 2) {
+                        System.out.print(roxo + "\u25A0" + reset);
+                    } else if (j == 2 + posicoes[i].getRow() && k == 2 + posicoes[i].getCol()) {
+                        System.out.print(amarelo + "\u25A0" + reset);
+                    } else {
+                        System.out.print("- ");
+                    }
+                }
+                System.out.println();
+            }
+        }
+        System.out.println();
+    }
 }

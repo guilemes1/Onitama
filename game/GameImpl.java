@@ -5,6 +5,8 @@ import exception.IncorrectTurnOrderException;
 import exception.InvalidCardException;
 import exception.InvalidPieceException;
 
+import java.util.Scanner;
+
 public class GameImpl implements Game{
 
     private Spot[][] board;
@@ -90,11 +92,84 @@ public class GameImpl implements Game{
 
     @Override
     public void printBoard() {
+        String vermelho = "\u001B[31m";
+        String azul = "\u001B[34m";
+        String reset = "\u001B[0m";
 
+        System.out.println("  0 1 2 3 4");
+        for (int i = 0; i < 5; i++) {
+            System.out.print(i + " ");
+            for (int j = 0; j < 5; j++) {
+                // Atribuição de valor - ou M ou A depende da peça que esta na posição
+                String imprimir = board[i][j].getPiece() == null ? "-" : board[i][j].getPiece().isAlive() ? board[i][j].getPiece().isMaster() ? "M" : "A" : "-";
+                // Impressão da cor do jogador
+                if (this.board[i][j].getColor().equals(Color.RED)) {
+                    System.out.print(vermelho + imprimir + " " + reset);
+                } else if (this.board[i][j].getColor().equals(Color.BLUE)) {
+                    System.out.print(azul + imprimir + " " + reset);
+                } else  {  //Padrão para caso não haja peça
+                    System.out.print("- ");
+                }
+            }
+            System.out.println();
+        }
+        System.out.println();
     }
 
     @Override
     public void takeMove() throws IncorrectTurnOrderException, IllegalMovementException, InvalidCardException, InvalidPieceException {
+        String vermelho = "\u001B[31m";
+        String azul = "\u001B[34m";
+        String reset = "\u001B[0m";
 
+        Scanner scan = new Scanner(System.in);
+
+        String corJogadorAtual = currentPlayer.getPieceColor().toString().equals("BLUE") ? azul : vermelho;
+
+        // Imprime uma mensagem ao jogador, infomando de quem    é a vez e a cor
+        System.out.println("Vez do " + this.currentPlayer.getName() + " com a cor " + corJogadorAtual + this.currentPlayer.getPieceColor().toString() + reset);
+
+        // Lê as cartas da mão do jogador
+        Card[] cartas = this.currentPlayer.getCards();
+        System.out.println("Suas cartas: " + cartas[0].getName() + " e " + cartas[1].getName());
+
+        // Pede ao jogador para que ele confirme de quem é a vez
+        System.out.print("Confirme a cor do jogador que fara a jogada (" + vermelho + "RED" + reset + " ou " + azul + "BLUE" + reset + "): ");
+        String corSelecionada = scan.nextLine();
+
+        // Caso a cor digitada seja diferente do jogador atual lança uma exceção
+        if (!currentPlayer.getPieceColor().toString().equals(corSelecionada)) {
+            throw new IncorrectTurnOrderException("A cor selecionada não corresponde ao jogador atual");
+        }
+
+        // Imprime o tabuleiro
+        this.printBoard();
+
+        System.out.println("Digite a posição da peça que deseja mover: ");
+        System.out.print("Linha (valor inteiro entre 0 a 4): ");
+        int linha = Integer.parseInt(scan.nextLine());
+        System.out.print("Coluna (valor inteiro entre 0 e 4): ");
+        int coluna = Integer.parseInt(scan.nextLine());
+
+        // Caso a posição da peça digitida seja vazia lança uma exceção
+        if (board[linha][coluna].getPiece() == null) {
+            throw new InvalidPieceException("A peça não existe");
+        }
+
+        // Caso a posição da peça digitada não seja da cor do jogador lança uma exceção
+        if (!board[linha][coluna].getColor().toString().equals(corSelecionada)) {
+            throw new InvalidPieceException("A peça selecionada não pertence a sua cor ou não é válida");
+        }
+
+        System.out.print("\nDigite a carta que deseja utilizar: ");
+        String cartaSelecionada = scan.nextLine();
+        System.out.println();
+
+        if (!cartas[0].getName().equals(cartaSelecionada) && !cartas[1].getName().equals(cartaSelecionada)) {
+            throw new InvalidCardException("A carta selecionada não esta na mão do jogador atual");
+        }
+
+        int aux = cartas[0].getName().equals(cartaSelecionada) ? 1 : 0;
+        cartas[aux].printMoviments();
     }
 }
