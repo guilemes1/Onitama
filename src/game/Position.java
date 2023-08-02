@@ -1,4 +1,4 @@
-package game;
+package src.game;
 
 /**
  * Classe usada para definição de estrutura de posições e movimentos do jogo

@@ -1,4 +1,4 @@
-package exception;
+package src.exception;
 
 /**
  * Exceção para quando se tenta jogar uma carta que não está na mão do jogador

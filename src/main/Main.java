@@ -1,10 +1,10 @@
-package main;
+package src.main;
 
-import exception.OnitamaGameException;
-import game.Card;
-import game.Color;
-import game.GameImpl;
-import game.Player;
+import src.exception.OnitamaGameException;
+import src.game.Card;
+import src.game.Color;
+import src.game.GameImpl;
+import src.game.Player;
 
 import java.util.Scanner;
 

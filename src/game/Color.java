@@ -1,4 +1,4 @@
-package game;
+package src.game;
 
 /**
  * Enum contendo todas as possíveis cores do jogo

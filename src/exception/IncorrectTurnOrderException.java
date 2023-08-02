@@ -1,4 +1,4 @@
-package exception;
+package src.exception;
 
 /**
  * Exceção para quando se tenta jogar fora do seu turno

@@ -1,4 +1,4 @@
-package game;
+package src.game;
 
 import java.util.*;
 
@@ -32,7 +32,7 @@ public class Card {
 
     /**
      * Método que devolve a cor da carta
-     * @return Enum game.Color que contém a cor da carta
+     * @return Enum src.game.Color que contém a cor da carta
      */
     public Color getColor() {
         return this.color;
@@ -41,7 +41,7 @@ public class Card {
     /**
      * Método que devolve todas as possíveis posições relativas de movimento.
      * A posição atual da peça é o ponto de origem (0,0). Uma carta possui as possíveis posições de movimento em relação ao ponto de origem.
-     * @return Um array de game.Position contendo todas as possíveis posições de movimento em relação ao ponto de origem
+     * @return Um array de src.game.Position contendo todas as possíveis posições de movimento em relação ao ponto de origem
      */
     public Position[] getPositions() {
         return this.positions;

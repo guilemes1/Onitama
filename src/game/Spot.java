@@ -1,6 +1,6 @@
-package game;
+package src.game;
 
-import exception.IllegalMovementException;
+import src.exception.IllegalMovementException;
 
 /**
  * Classe contendo ações e informações sobre cada espaço (quadrado) no tabuleiro
@@ -41,7 +41,7 @@ public class Spot {
 
     /**
      * Método que devolve a posição (coordenadas) do espaço
-     * @return Objeto game.Position contendo a posição (coordenadas) do espaço
+     * @return Objeto src.game.Position contendo a posição (coordenadas) do espaço
      */
     public Position getPosition() {
         return this.pos;
@@ -49,7 +49,7 @@ public class Spot {
 
     /**
      * Método que devolve a peça contida neste espaço
-     * @return Objeto game.Piece caso tenha uma peça ou null caso o espaço esteja vazio
+     * @return Objeto src.game.Piece caso tenha uma peça ou null caso o espaço esteja vazio
      */
     public Piece getPiece() {
         return this.piece;
@@ -57,7 +57,7 @@ public class Spot {
 
     /**
      * Método que devolve a cor do espaço
-     * @return Enum game.Color com a cor do espaço. Caso o espaço não tenha cor, o valor do enum será NONE
+     * @return Enum src.game.Color com a cor do espaço. Caso o espaço não tenha cor, o valor do enum será NONE
      */
     public Color getColor() {
         return this.color;

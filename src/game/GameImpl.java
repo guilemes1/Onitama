@@ -1,9 +1,9 @@
-package game;
+package src.game;
 
-import exception.IllegalMovementException;
-import exception.IncorrectTurnOrderException;
-import exception.InvalidCardException;
-import exception.InvalidPieceException;
+import src.exception.IllegalMovementException;
+import src.exception.IncorrectTurnOrderException;
+import src.exception.InvalidCardException;
+import src.exception.InvalidPieceException;
 
 import java.util.Scanner;
 

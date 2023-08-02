@@ -1,4 +1,4 @@
-package exception;
+package src.exception;
 
 /**
  * Exceção geral para qualquer regra burlada
