@@ -88,9 +88,9 @@ public class Card {
                 System.out.print(j + " ");
                 for (int k = 0; k < 5; k++) {
                     if (j == 2 && k == 2) {
-                        System.out.print(roxo + "\u25A0" + reset);
+                        System.out.print(roxo + "\u25A0 " + reset);
                     } else if (j == 2 + posicoes[i].getRow() && k == 2 + posicoes[i].getCol()) {
-                        System.out.print(amarelo + "\u25A0" + reset);
+                        System.out.print(amarelo + "\u25A0 " + reset);
                     } else {
                         System.out.print("- ");
                     }

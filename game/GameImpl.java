@@ -82,12 +82,77 @@ public class GameImpl implements Game{
 
     @Override
     public void makeMove(Piece piece, Card card, Position position) throws IncorrectTurnOrderException, IllegalMovementException, InvalidCardException, InvalidPieceException {
+        if (piece == null) {
+            throw new InvalidPieceException("Peça invalida");
+        }
+
+        if (card == null) {
+            throw new InvalidCardException("Carta inválida");
+        }
+
+        if (position == null) {
+            throw new IllegalMovementException("Posição invalida");
+        }
+
+        Card[] cartas = this.currentPlayer.getCards();
+        boolean presente = false;
+        for (Card carta : cartas) {
+            if (carta.equals(card)) {
+                presente = true;
+                break;
+            }
+        }
+
+        if (!presente) {
+            throw new InvalidCardException("Essa carta não esta na mão do jogador");
+        }
+
+        if (!piece.isAlive()) {
+            throw new InvalidPieceException("Você não pode mover uma peça que ja morreu");
+        }
+
+        // Se existe outra peça da mesma cor na posição jogada lança uma exceção
+        board[position.getRow()][position.getCol()].occupySpot(piece);
+
+        // Faz a jogada, a peça que não é da mesma cor é sobreescrita com a peça do outro jogador
+        Spot jogada = new Spot(piece, position, piece.getColor());
+        board[position.getRow()][position.getCol()] = jogada;
+
+        // Troca a carta jogada com a que esta na mesa
+        Card novaCartaMesa = card;
+        currentPlayer.swapCard(card, this.tableCard);
+        this.tableCard = novaCartaMesa;
+
+        // Realiza a troca do jogador atual
+        Player novoCurrentPlayer = this.currentPlayer.getPieceColor().equals(Color.RED) ? bluePlayer : redPlayer;
+        this.currentPlayer = novoCurrentPlayer;
 
     }
 
     @Override
     public boolean checkVictory(Color color) {
-        return false;
+        for (int i = 0; i < this.board.length; i++) {
+            if (this.board[0][i].getPiece() != null && this.board[0][i].getPiece().getColor().equals(Color.RED)) {
+                return true;
+            }
+        }
+
+        for (int i = 0; i < this.board.length; i++) {
+            if (this.board[4][i].getPiece() != null && this.board[4][i].getPiece().getColor().equals(Color.BLUE)) {
+                return true;
+            }
+        }
+
+        for (int i = 0; i < this.board.length; i++) {
+            for (int j = 0; j < this.board.length; j++) {
+                if (this.board[i][j].getPiece() != null) {
+                    if (this.board[i][j].getPiece().isMaster() && this.board[i][j].getColor().equals(color)) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     @Override
@@ -161,15 +226,38 @@ public class GameImpl implements Game{
             throw new InvalidPieceException("A peça selecionada não pertence a sua cor ou não é válida");
         }
 
+        // Solicita a carta que o jogador deseja jogar, dentre as cartas que estão em sua mão
         System.out.print("\nDigite a carta que deseja utilizar: ");
         String cartaSelecionada = scan.nextLine();
         System.out.println();
 
+        // Caso a carta digitada não esteja em sua mão, lança uma exceção
         if (!cartas[0].getName().equals(cartaSelecionada) && !cartas[1].getName().equals(cartaSelecionada)) {
             throw new InvalidCardException("A carta selecionada não esta na mão do jogador atual");
         }
 
-        int aux = cartas[0].getName().equals(cartaSelecionada) ? 1 : 0;
+        int aux = cartas[0].getName().equals(cartaSelecionada) ? 0 : 1;
         cartas[aux].printMoviments();
+
+        System.out.print("Digite qual movimento deseja fazer: ");
+        int movimento = Integer.parseInt(scan.nextLine());
+
+        Position[] posicoes = cartas[aux].getPositions();
+        if (movimento > posicoes.length) {
+            throw new IllegalMovementException("O movimento não existe");
+        }
+
+        int linhaAtualizada = linha + posicoes[movimento - 1].getRow();
+        int colunaAtualizada = coluna + posicoes[movimento - 1].getCol();
+
+        // Caso o movimento saia do tabuleiro lança uma exceção
+        if (colunaAtualizada > 4 || colunaAtualizada < 0 || linhaAtualizada > 4 || linhaAtualizada < 0) {
+            throw new IllegalMovementException("O movimento saiu do tabuleiro");
+        }
+
+        Position posicaoAtualizada = new Position(linhaAtualizada, colunaAtualizada);
+
+        makeMove(board[linha][coluna].getPiece(), cartas[aux], posicaoAtualizada);
+        board[linha][coluna].releaseSpot();
     }
 }
