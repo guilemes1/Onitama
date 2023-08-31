@@ -30,7 +30,7 @@ javac -cp src -d bin src/main/Main.java src/game/*.java src/exception/*.java
 4. Execute o comando abaixo para executa-lo:
 
 ```java
-java -cp bin main/Main
+java -cp bin src/main/Main
 ```
 
 5. DIVIRTA-SE 😋
